@@ -5,7 +5,7 @@
 using namespace std;
 
 int main() {
-    const int NUM_SCORES = 5;
+    const int numScores = 5;
     string studentName = "";
     int studentCount = 0;
     double totalAverageSum = 0.0;
@@ -14,7 +14,7 @@ int main() {
 
     while (true) {
         cout << "Student name (or end to finish): ";
-        cin >> studentName;
+        getline(cin, studentName);
 
         if (studentName == "end") {
             break;
@@ -22,15 +22,13 @@ int main() {
 
         int scoreSum = 0;
 
-        // Ввод и проверка 5 оценок для текущего студента
-        for (int i = 1; i <= NUM_SCORES; i++) {
+        for (int i = 1; i <= numScores; i++) {
             int score = 0;
 
             while (true) {
                 cout << "Score " << i << ": ";
                 cin >> score;
 
-                // Защита от ввода букв вместо числа (бонус)
                 if (cin.fail()) {
                     cin.clear();
                     cin.ignore(1000, '\n');
@@ -48,7 +46,10 @@ int main() {
             scoreSum += score;
         }
 
-        double average = static_cast<double>(scoreSum) / NUM_SCORES;
+        // Очищаем символ переноса строки перед следующим вызовом getline
+        cin.ignore(1000, '\n');
+
+        double average = static_cast<double>(scoreSum) / numScores;
         char grade = 'F';
 
         if (average >= 90.0) {
